@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 public class Reservation {
 
@@ -16,12 +18,14 @@ public class Reservation {
 	@Column(name = "ID_RESERVATION")
 	private Long idReservation;
 	
+	@JsonFormat(pattern="yyyy-MM-dd")
 	@Column(name = "RESERVATION_DATE")
 	private Date reservationDate;
 	
 	@Column(name = "IS_CANCELED")
 	private boolean isCanceled;
 	
+	@JsonFormat(pattern="yyyy-MM-dd")
 	@Column(name = "CANCEL_DATE")
 	private Date cancelDate;
 
