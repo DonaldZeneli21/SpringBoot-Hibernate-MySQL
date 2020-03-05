@@ -37,6 +37,8 @@ public class TravelerController {
 		return ResponseEntity.ok(trav);
 	}
 
+	
+	/* Pagination */
 	@GetMapping(value = "/getPaged")
 	public ResponseEntity<List<Traveler>> getPagedTravelers(
 			@RequestParam(defaultValue = "0") Integer pageNo,
@@ -47,6 +49,7 @@ public class TravelerController {
 		return new ResponseEntity<List<Traveler>>(list, new HttpHeaders(), HttpStatus.OK);
 	}
 	
+	/* Pagination with order*/
 	@GetMapping(value = "/getPagedWithOrder")
 	public ResponseEntity<List<Traveler>> getAllTravelers(
 			@RequestParam(defaultValue = "0") Integer pageNo,
