@@ -4,11 +4,14 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.reservation.model.Reservation;
@@ -71,5 +74,28 @@ public class ReservationController {
 		else {
 			return ResponseEntity.ok("Record doesn't exist !");
 		}
+	}
+	
+	/* Pagination */
+	@GetMapping(value = "/getPaged")
+	public ResponseEntity<List<Reservation>> getPagedReservation(
+			@RequestParam(defaultValue = "0") Integer pageNo,
+			@RequestParam(defaultValue = "10") Integer pageSize) {
+		
+		List<Reservation> list = service.getPagedReservation(pageNo, pageSize);
+
+		return new ResponseEntity<List<Reservation>>(list, new HttpHeaders(), HttpStatus.OK);
+	}
+	
+	/* Pagination with order*/
+	@GetMapping(value = "/getPagedWithOrder")
+	public ResponseEntity<List<Reservation>> getPagedReservation(
+			@RequestParam(defaultValue = "0") Integer pageNo,
+			@RequestParam(defaultValue = "10") Integer pageSize, 
+			@RequestParam(defaultValue = "id") String sortBy) {
+		
+		List<Reservation> list = service.getPagedReservationWithOrder(pageNo, pageSize, sortBy);
+
+		return new ResponseEntity<List<Reservation>>(list, new HttpHeaders(), HttpStatus.OK);
 	}
 }

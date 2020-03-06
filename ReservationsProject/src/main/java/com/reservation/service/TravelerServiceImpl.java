@@ -48,6 +48,19 @@ public class TravelerServiceImpl implements TravelerService{
 	}
 	
 	@Override
+	public List<Traveler> getPagedTravelers(Integer pageNo, Integer pageSize) {
+		 Pageable paging = PageRequest.of(pageNo, pageSize);
+		 
+	        Page<Traveler> pagedResult = repository.findAll(paging);
+	         
+	        if(pagedResult.hasContent()) {
+	            return pagedResult.getContent();
+	        } else {
+	            return new ArrayList<Traveler>();
+	        }
+	    }
+	
+	@Override
 	public List<Traveler> getPagedTravelersWithOrder(Integer pageNo, Integer pageSize, String sortBy) {
 		
 		 Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
@@ -61,20 +74,6 @@ public class TravelerServiceImpl implements TravelerService{
 	        }
 	    }
 
-	@Override
-	public List<Traveler> getPagedTravelers(Integer pageNo, Integer pageSize) {
-		 Pageable paging = PageRequest.of(pageNo, pageSize);
-		 
-	        Page<Traveler> pagedResult = repository.findAll(paging);
-	         
-	        if(pagedResult.hasContent()) {
-	            return pagedResult.getContent();
-	        } else {
-	            return new ArrayList<Traveler>();
-	        }
-	    }
-
-	
 	
 	}
 

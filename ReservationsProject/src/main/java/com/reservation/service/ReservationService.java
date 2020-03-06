@@ -14,4 +14,7 @@ public interface ReservationService {
 	public Reservation insertReservation(Reservation request);
 	public Optional<Reservation> getById(Reservation request);
 	public void deleteReservation(Reservation request);
+	
+	public List<Reservation> getPagedReservation(Integer pageNo, Integer pageSize);
+	public List<Reservation> getPagedReservationWithOrder(Integer pageNo, Integer pageSize, String sortBy);
 }

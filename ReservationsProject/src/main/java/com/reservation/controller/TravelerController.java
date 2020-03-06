@@ -93,7 +93,7 @@ public class TravelerController {
 	
 	/* Pagination with order*/
 	@GetMapping(value = "/getPagedWithOrder")
-	public ResponseEntity<List<Traveler>> getAllTravelers(
+	public ResponseEntity<List<Traveler>> getPagedTravelers(
 			@RequestParam(defaultValue = "0") Integer pageNo,
 			@RequestParam(defaultValue = "10") Integer pageSize, 
 			@RequestParam(defaultValue = "id") String sortBy) {

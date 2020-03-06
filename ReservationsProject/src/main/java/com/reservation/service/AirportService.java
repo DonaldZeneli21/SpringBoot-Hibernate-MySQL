@@ -14,4 +14,7 @@ public interface AirportService {
 	public Airport insertAirport(Airport request);
 	public Optional<Airport> getById(Airport request);
 	public void deleteAirport(Airport request);
+	
+	public List<Airport> getPagedAirports(Integer pageNo, Integer pageSize);
+	public List<Airport> getPagedAirportsWithOrder(Integer pageNo, Integer pageSize, String sortBy);
 }

@@ -14,4 +14,7 @@ public interface DestinationService {
 	public Destination insertDestination(Destination request);
 	public Optional<Destination> getById(Destination request);
 	public void deleteDestination(Destination request);
+	
+	public List<Destination> getPagedDestination(Integer pageNo, Integer pageSize);
+	public List<Destination> getPagedDestinationWithOrder(Integer pageNo, Integer pageSize, String sortBy);
 }

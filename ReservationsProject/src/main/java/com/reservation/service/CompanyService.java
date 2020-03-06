@@ -14,4 +14,7 @@ public interface CompanyService {
 	public Company insertCompany(Company request);
 	public Optional<Company> getById(Company request);
 	public void deleteCompany(Company request);
+	
+	public List<Company> getPagedCompany(Integer pageNo, Integer pageSize);
+	public List<Company> getPagedCompanyWithOrder(Integer pageNo, Integer pageSize, String sortBy);
 }

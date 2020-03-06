@@ -16,6 +16,7 @@ public interface TravelerService {
 	public void deleteTraveler(Traveler request);
 	
 	
-	public List<Traveler> getPagedTravelersWithOrder(Integer pageNo, Integer pageSize, String sortBy);
 	public List<Traveler> getPagedTravelers(Integer pageNo, Integer pageSize);
+	public List<Traveler> getPagedTravelersWithOrder(Integer pageNo, Integer pageSize, String sortBy);
+	
 }
