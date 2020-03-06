@@ -1,6 +1,7 @@
 package com.reservation.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -37,6 +38,47 @@ public class TravelerController {
 		return ResponseEntity.ok(trav);
 	}
 
+	
+	@GetMapping(value = "/getTravelerById")
+	public ResponseEntity<Optional<Traveler>> getTravelerById(@RequestBody Traveler request) {
+
+		Optional<Traveler> stock = service.getById(request);
+		if (stock.isPresent()) {
+			return ResponseEntity.ok(stock);
+		} else {
+			return ResponseEntity.ok(null);
+		}
+
+	}
+
+	@PostMapping(value = "updateTraveler")
+	public ResponseEntity<Traveler> updateTraveler( @RequestBody Traveler request) {
+		Optional<Traveler> stock = service.getById(request); 
+		if (stock.isPresent()) {
+			Traveler traveler = service.insertTraveler(request);
+			traveler.setTravelerName(request.getTravelerName());
+			traveler.setTravelerSurname(request.getTravelerSurname());
+			traveler.setTravelerBirthdate(request.getTravelerBirthdate());
+			traveler.setTravelerEmail(request.getTravelerEmail());
+			traveler.setPhoneNr(request.getPhoneNr());
+			return ResponseEntity.ok(traveler);
+		}
+		return ResponseEntity.ok(null);
+	}
+	
+	@PostMapping(value = "deleteTraveler")
+	public ResponseEntity<?> deleteTraveler(@RequestBody Traveler request){
+		
+		Optional<Traveler> stock = service.getById(request);
+		if(stock.isPresent()) {
+			service.deleteTraveler(request);
+			return ResponseEntity.ok("Traveler deleted!");
+		}
+		else {
+			return ResponseEntity.ok("Record doesn't exist !");
+		}
+	}
+	
 	
 	/* Pagination */
 	@GetMapping(value = "/getPaged")

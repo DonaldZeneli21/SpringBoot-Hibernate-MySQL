@@ -1,6 +1,7 @@
 package com.reservation.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,5 +29,19 @@ public class ReservationServiceImpl implements ReservationService{
 		res.setCancelDate(request.getCancelDate());
 		return res;
 	}
+
+	@Override
+	public Optional<Reservation> getById(Reservation request) {
+		
+		return repository.findById(request.getIdReservation());
+	}
+
+	@Override
+	public void deleteReservation(Reservation request) {
+		
+		repository.deleteById(request.getIdReservation());
+	}
+
+
 
 }

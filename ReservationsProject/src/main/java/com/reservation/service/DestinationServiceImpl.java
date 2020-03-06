@@ -1,6 +1,7 @@
 package com.reservation.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,18 @@ public class DestinationServiceImpl implements DestinationService{
 		dest.setCity(request.getCity());
 		dest.setLocation(request.getLocation());
 		return dest;
+	}
+
+	@Override
+	public Optional<Destination> getById(Destination request) {
+		
+		return repository.findById(request.getIdDestination());
+	}
+
+	@Override
+	public void deleteDestination(Destination request) {
+
+		repository.deleteById(request.getIdDestination());
 	}
 
 }

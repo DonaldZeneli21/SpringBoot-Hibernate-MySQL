@@ -2,6 +2,7 @@ package com.reservation.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -35,6 +36,18 @@ public class TravelerServiceImpl implements TravelerService{
 	}
 
 	@Override
+	public Optional<Traveler> getById(Traveler request) {
+	
+		return repository.findById(request.getIdTraveler());
+	}
+
+	@Override
+	public void deleteTraveler(Traveler request) {
+		
+		repository.deleteById(request.getIdTraveler());
+	}
+	
+	@Override
 	public List<Traveler> getPagedTravelersWithOrder(Integer pageNo, Integer pageSize, String sortBy) {
 		
 		 Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
@@ -60,6 +73,8 @@ public class TravelerServiceImpl implements TravelerService{
 	            return new ArrayList<Traveler>();
 	        }
 	    }
+
+	
 	
 	}
 

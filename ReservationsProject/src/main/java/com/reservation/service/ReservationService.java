@@ -1,6 +1,7 @@
 package com.reservation.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -11,4 +12,6 @@ public interface ReservationService {
 
 	public List<Reservation> getReservation();
 	public Reservation insertReservation(Reservation request);
+	public Optional<Reservation> getById(Reservation request);
+	public void deleteReservation(Reservation request);
 }

@@ -1,6 +1,7 @@
 package com.reservation.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,16 +22,56 @@ public class DestinationController {
 	DestinationService service;
 	
 	@GetMapping(value = "/getAll")
-	public ResponseEntity<List<Destination>> getDestination(){
+	public ResponseEntity<List<Destination>> getAllDestination(){
 		
 		List<Destination> list = service.getDestination();
 		return ResponseEntity.ok(list);
 	}
 	
-	@PostMapping(value = "/insertDest")
-	public ResponseEntity<Destination> save(@RequestBody Destination request){
+	@PostMapping(value = "/insertDestination")
+	public ResponseEntity<Destination> insertDestination(@RequestBody Destination request){
 		
 		Destination inserted = service.insertDestination(request);
 		return ResponseEntity.ok(inserted);
+	}
+	
+	@GetMapping(value = "/getDestinationById")
+	public ResponseEntity<Optional<Destination>> getDestinationById(@RequestBody Destination request) {
+
+		Optional<Destination> stock = service.getById(request);
+		if (stock.isPresent()) {
+			return ResponseEntity.ok(stock);
+		} else {
+			return ResponseEntity.ok(null);
+		}
+
+	}
+
+	@PostMapping(value = "updateDestination")
+	public ResponseEntity<Destination> updateDestination( @RequestBody Destination request) {
+		Optional<Destination> stock = service.getById(request); 
+		if (stock.isPresent()) {
+			Destination destination = service.insertDestination(request);
+			destination.setContinent(request.getContinent());
+			destination.setCountry(request.getCountry());
+			destination.setCity(request.getCity());
+			destination.setLocation(request.getLocation());
+			
+			return ResponseEntity.ok(destination);
+		}
+		return ResponseEntity.ok(null);
+	}
+	
+	@PostMapping(value = "deleteDestination")
+	public ResponseEntity<?> deleteDestination(@RequestBody Destination request){
+		
+		Optional<Destination> stock = service.getById(request);
+		if(stock.isPresent()) {
+			service.deleteDestination(request);
+			return ResponseEntity.ok("Destination deleted!");
+		}
+		else {
+			return ResponseEntity.ok("Record doesn't exist !");
+		}
 	}
 }
