@@ -28,6 +28,7 @@ public class CompanyServiceImpl implements CompanyService{
 
 	@Override
 	public Company insertCompany(Company request) {
+		
 		Company company = repository.save(request);
 		company.setCompanyName(request.getCompanyName());
 		company.setRegistrationDate(request.getRegistrationDate());
