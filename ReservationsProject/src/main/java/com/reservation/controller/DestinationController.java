@@ -40,6 +40,7 @@ public class DestinationController {
 		return ResponseEntity.ok(inserted);
 	}
 	
+	
 	@GetMapping(value = "/getDestinationById")
 	public ResponseEntity<Optional<Destination>> getDestinationById(@RequestBody Destination request) {
 
@@ -52,6 +53,7 @@ public class DestinationController {
 
 	}
 
+	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping(value = "updateDestination")
 	public ResponseEntity<Destination> updateDestination( @RequestBody Destination request) {
 		Optional<Destination> stock = service.getById(request); 
@@ -67,6 +69,7 @@ public class DestinationController {
 		return ResponseEntity.ok(null);
 	}
 	
+	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping(value = "deleteDestination")
 	public ResponseEntity<?> deleteDestination(@RequestBody Destination request){
 		

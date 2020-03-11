@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,6 +32,7 @@ public class CompanyController {
 		return ResponseEntity.ok(list);
 	}
 
+	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping(value = "/insertCompany")
 	public ResponseEntity<Company> insertCompany(@RequestBody Company request) {
 
@@ -50,6 +52,7 @@ public class CompanyController {
 
 	}
 
+	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping(value = "updateCompany")
 	public ResponseEntity<Company> updateCompany( @RequestBody Company request) {
 		Optional<Company> stock = service.getById(request); 
@@ -63,6 +66,7 @@ public class CompanyController {
 		return ResponseEntity.ok(null);
 	}
 	
+	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping(value = "deleteCompany")
 	public ResponseEntity<?> deleteCompany(@RequestBody Company request){
 		

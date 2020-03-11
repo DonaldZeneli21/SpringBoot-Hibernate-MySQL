@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,6 +32,7 @@ public class TravelerController {
 		return ResponseEntity.ok(list);
 	}
 
+	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping(value = "/insertTraveler")
 	public ResponseEntity<Traveler> insertTraveler(@RequestBody Traveler request) {
 
@@ -51,6 +53,7 @@ public class TravelerController {
 
 	}
 
+	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping(value = "updateTraveler")
 	public ResponseEntity<Traveler> updateTraveler( @RequestBody Traveler request) {
 		Optional<Traveler> stock = service.getById(request); 
@@ -66,6 +69,7 @@ public class TravelerController {
 		return ResponseEntity.ok(null);
 	}
 	
+	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping(value = "deleteTraveler")
 	public ResponseEntity<?> deleteTraveler(@RequestBody Traveler request){
 		

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -36,6 +37,7 @@ public class AirportController {
 			return ResponseEntity.ok(null);
 		}
 	}
+	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping(value = "/insertAirport")
 	public ResponseEntity<Airport> insertAirport(@RequestBody Airport request){
 		
@@ -63,7 +65,7 @@ public class AirportController {
 		
 	}
 	
-
+	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping(value = "updateAirport")
 	public ResponseEntity<Airport> updateAirport( @RequestBody Airport request) {
 		Optional<Airport> stock = service.getById(request); 
@@ -78,6 +80,7 @@ public class AirportController {
 		return ResponseEntity.ok(null);
 	}
 	
+	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping(value = "deleteAirport")
 	public ResponseEntity<?> deleteAirport(@RequestBody Airport request){
 		
