@@ -25,6 +25,7 @@ public class ReservationController {
 	@Autowired
 	private ReservationService service;
 	
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping(value = "/getAll")
 	public ResponseEntity<List<Reservation>> getAllReservation(){
 		
@@ -40,6 +41,7 @@ public class ReservationController {
 		return ResponseEntity.ok(res);
 	}
 	
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping(value = "/getReservationnById")
 	public ResponseEntity<Optional<Reservation>> getReservationById(@RequestBody Reservation request) {
 
@@ -81,6 +83,7 @@ public class ReservationController {
 	}
 	
 	/* Pagination */
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping(value = "/getPaged")
 	public ResponseEntity<List<Reservation>> getPagedReservation(
 			@RequestParam(defaultValue = "0") Integer pageNo,
@@ -92,6 +95,7 @@ public class ReservationController {
 	}
 	
 	/* Pagination with order*/
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping(value = "/getPagedWithOrder")
 	public ResponseEntity<List<Reservation>> getPagedReservation(
 			@RequestParam(defaultValue = "0") Integer pageNo,

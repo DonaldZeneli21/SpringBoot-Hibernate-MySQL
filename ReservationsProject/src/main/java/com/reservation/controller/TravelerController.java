@@ -25,6 +25,7 @@ public class TravelerController {
 	@Autowired
 	private TravelerService service;
 
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping(value = "/getAll")
 	public ResponseEntity<List<Traveler>> getAllTraveler() {
 
@@ -40,7 +41,7 @@ public class TravelerController {
 		return ResponseEntity.ok(trav);
 	}
 
-	
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping(value = "/getTravelerById")
 	public ResponseEntity<Optional<Traveler>> getTravelerById(@RequestBody Traveler request) {
 
@@ -85,6 +86,7 @@ public class TravelerController {
 	
 	
 	/* Pagination */
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping(value = "/getPaged")
 	public ResponseEntity<List<Traveler>> getPagedTravelers(
 			@RequestParam(defaultValue = "0") Integer pageNo,
@@ -96,6 +98,7 @@ public class TravelerController {
 	}
 	
 	/* Pagination with order*/
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping(value = "/getPagedWithOrder")
 	public ResponseEntity<List<Traveler>> getPagedTravelers(
 			@RequestParam(defaultValue = "0") Integer pageNo,

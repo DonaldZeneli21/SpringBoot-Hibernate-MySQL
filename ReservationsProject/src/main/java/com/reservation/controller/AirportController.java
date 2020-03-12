@@ -28,6 +28,7 @@ public class AirportController {
 	@GetMapping(value = "/getAll")
 	public ResponseEntity<List<Airport>> getAllAirport(){
 		
+		
 		List<Airport> list = service.getAirport();
 		
 		if(list.size()>0) {

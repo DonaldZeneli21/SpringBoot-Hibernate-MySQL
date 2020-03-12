@@ -71,7 +71,7 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
                         .permitAll()
                     .antMatchers("/user/checkUsernameAvailability", "/user/checkEmailAvailability")
                         .permitAll()
-                    .antMatchers(HttpMethod.GET, "/destination/**", "/airport/**", "/company/**", "/traveler/**", "/reservation/**")
+                    .antMatchers(HttpMethod.GET, "/destination/**", "/airport/**", "/company/**")
                         .permitAll()
                     .anyRequest()
                         .authenticated();
